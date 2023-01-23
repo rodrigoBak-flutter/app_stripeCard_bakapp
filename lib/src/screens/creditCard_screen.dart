@@ -1,3 +1,4 @@
+import 'package:app_strikecard_bakapp/src/bloc/pay-creditCard/pay_bloc.dart';
 import 'package:app_strikecard_bakapp/src/models/creditCard_model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,8 @@ import 'package:app_strikecard_bakapp/src/widgets/totalPay_widget.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class CreditCardScreen extends StatelessWidget {
+
+  //final tarjeta = context.watch<PayBloc>().state.tarjeta;
   final tarjeta = CreditCard(
       cardNumberHidden: '4242',
       cardNumber: '4242424242424242',

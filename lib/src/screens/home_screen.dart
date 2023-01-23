@@ -1,7 +1,13 @@
+import 'package:flutter/material.dart';
+
+//Manejador de estado
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:app_strikecard_bakapp/src/bloc/pay-creditCard/pay_bloc.dart';
 import 'package:app_strikecard_bakapp/src/helpers/helpers.dart';
 import 'package:app_strikecard_bakapp/src/screens/creditCard_screen.dart';
 import 'package:app_strikecard_bakapp/src/widgets/totalPay_widget.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 //Data
@@ -15,7 +21,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showLoading(context);
+            },
             icon: const Icon(Icons.add),
           )
         ],
@@ -39,14 +47,13 @@ class HomeScreen extends StatelessWidget {
                     onTap: () {
                       // print(tarjeta.cardHolderName);
 
+                      //Evento
+                      context.read<PayBloc>().add (OnSelecctionCard(tarjeta));
+                      
+
                       //Efecto de transicion bonito de una pantalla a otra
                       Navigator.push(
-                        context,
-                        navegarFadeIn(
-                          context,
-                          CreditCardScreen(),
-                        ),
-                      );
+                          context, navegarFadeIn(context, CreditCardScreen()));
                     },
                     child: Hero(
                       tag: tarjeta.cardNumber,
@@ -57,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                         cvvCode: tarjeta.cvv,
                         showBackView: false,
                         onCreditCardWidgetChange: (CreditCardBrand) {},
-                    
+
                         //Diseño de la tarjeta
                         glassmorphismConfig: Glassmorphism(
                           blurX: 10.0,
